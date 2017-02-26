@@ -1,4 +1,4 @@
-import {actionRequest, actionFailure} from '../actions/index'
+import {actionRequest, actionFailure} from './action'
 
 export default function promiseMiddleware() {
 	return next => action => {
