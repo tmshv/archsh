@@ -1,0 +1,56 @@
+.Body {
+    width: 100%;
+    height: calc(100% - 2em);
+
+    pointer-events: none;
+
+    position: absolute;
+    top: 1em;
+
+    margin: 0;
+    z-index: 500;
+
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.Body-content {
+    min-width: 25em;
+    width: 40%;
+    height: 100%;
+
+    pointer-events: auto;
+
+    margin: 0 1em 0 0;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+
+    overflow: auto;
+}
+
+.Article-element {
+    padding: 0.75em 1em 0;
+}
+
+main {
+    display: flex;
+}
+
+main h2 {
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+
+    position: relative;
+}
+
+.Body .fotorama__stage {
+    background-color: #222;
+}
+
+.Head {
+    position: fixed;
+    background-color: white;
+
+    z-index: 10;
+}
