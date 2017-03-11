@@ -8,7 +8,7 @@ class Body extends Component {
 			<div className="Body">
 				<div className="Body-content">
 					<main>
-
+						{this.props.children}
 					</main>
 				</div>
 			</div>

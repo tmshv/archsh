@@ -19,6 +19,7 @@ let baseballIcon = Leaflet.icon({
 
 let map = null
 let currentArea = null
+let projectsLayer = null
 let stripes = null
 
 class MyMap extends Component {
@@ -29,6 +30,12 @@ class MyMap extends Component {
 
 	componentDidMount() {
 		this.map()
+
+		projectsLayer = Leaflet.layerGroup()
+		projectsLayer.addTo(map)
+
+		const {projects, onSelect, activeProject} = this.props
+		if (projects) this.initProjects(projects, onSelect)
 	}
 
 	onMapClick() {
@@ -55,35 +62,37 @@ class MyMap extends Component {
 			angle: 45,
 			weight: 1,
 			color: '#e11e1c',
-		});
+		})
 		stripes.addTo(map)
 
 		map.on('click', this.onMapClick)
 	}
 
 	initProjects(projects, onSelect) {
-		projects.forEach(project => {
-			const {location, area} = project
+		if(projectsLayer) {
+			projectsLayer.clearLayers()
 
-			const m = Leaflet.marker(location, {icon: baseballIcon})
-			m.addTo(map)
+			projects.forEach(project => {
+				const {location, area} = project
 
-			m.on('click', () => {
-				if (!area) return
+				const m = Leaflet.marker(location, {icon: baseballIcon})
+				//m.addTo(map)
+				m.addTo(projectsLayer)
 
-				onSelect(project.name)
-
-
+				m.on('click', () => {
+					if (!area) return
+					onSelect(project.name)
+				})
 			})
-		})
+		}
 	}
 
 	render() {
 		const {projects, onSelect, activeProject} = this.props
 		if (projects) this.initProjects(projects, onSelect)
 
-		console.log('MAP RENDER')
-		console.log(activeProject)
+		//console.log('MAP RENDER')
+		//console.log(activeProject)
 
 		if (currentArea) currentArea.clearLayers()
 		if(activeProject) {

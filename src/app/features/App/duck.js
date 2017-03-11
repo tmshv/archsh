@@ -2,6 +2,9 @@ import {combineReducers} from 'redux'
 import api from '../../../api'
 import {pack} from '../../../lib/fn'
 
+//import {browserHistory} from 'react-router'
+import {routerActions} from 'react-router-redux'
+
 const FETCH_PROJECTS = 'arch/app/FETCH_PROJECTS'
 const FOCUS_PROJECTS = 'arch/app/FOCUS_PROJECTS'
 
@@ -14,6 +17,13 @@ export function fetchProjects() {
 }
 
 export function focusProject(projectName) {
+	//return dispatch => {
+	//	const url = projectName
+	//		? `/projects/${projectName}`
+	//		: ''
+	//	dispatch(routerActions.push(url))
+	//}
+
 	return {
 		type: FOCUS_PROJECTS,
 		projectName
