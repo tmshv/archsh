@@ -4,7 +4,6 @@ import './App.css'
 import Map from '../Map'
 import Body from '../Body'
 import AppWrapper from './AppWrapper'
-import {Route} from 'react-router'
 
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
@@ -31,46 +30,40 @@ class App extends Component {
 		this.props.fetchProjects()
 	}
 
+	componentDidUpdate(){
+		const projectName = this.props.params.name
+		this.props.focusProject(projectName)
+	}
+
 	render() {
-		const {projects, activeProject} = this.props
+		const {children, projects, activeProject} = this.props
 
-		//console.log("APP RENDER", this.props.routeParams)
-		console.log("APP RENDER", this.props.children)
-
-		//const projectName = this.props.routeParams.name
-		//const project = projectName
-		//	? activeProject
-		//	: null
-
-		if(!this.props.children) {
-			this.props.focusProject()
+		const currentPath = () => {
+			try {
+				return this.props.routing.locationBeforeTransitions.pathname
+			} catch (e) {
+				return null
+			}
 		}
 
-		const onClick = (name) => {
-			console.log("APP ON CLICK", name)
-			//
-			//if (!name)
-
-			const url = name
-				? `/projects/${name}`
+		const onClick = (project) => {
+			const old = currentPath()
+			const url = project
+				? `/projects/${project.name}`
 				: '/'
-			this.props.push(url)
+
+			if (url !== old) this.props.push(url)
 		}
 
 		return (
 			<div className="App">
-				<Map projects={projects} onSelect={onClick} activeProject={activeProject}/>
 				<AppWrapper>
-					{this.props.children
-						? <Body>{this.props.children}</Body>
+					{children
+						? <Body>{children}</Body>
 						: null
 					}
-
-					{/*{activeProject*/}
-					{/*? <Body/>*/}
-					{/*: null*/}
-					{/*}*/}
 				</AppWrapper>
+				<Map projects={projects} onSelect={onClick} activeProject={activeProject}/>
 			</div>
 		)
 	}

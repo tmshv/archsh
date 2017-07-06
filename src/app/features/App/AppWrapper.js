@@ -11,7 +11,6 @@ const App = ({children}) => (
 				{children}
 			</div>
 		</div>
-		{/*<footer className="AppWrapper-footer">Foo Maps</footer>*/}
 	</div>
 )
 
