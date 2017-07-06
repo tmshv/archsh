@@ -5,9 +5,10 @@ import L from 'leaflet'
  https://github.com/teastman/Leaflet.pattern
  (c) 2015, Tyler Eastman
  */
-(function (window, document, undefined) {/*
- * L.Pattern is the base class for fill patterns for leaflet Paths.
- */
+(function (window, document) {
+	/*
+	 * L.Pattern is the base class for fill patterns for leaflet Paths.
+	 */
 
 	L.Pattern = L.Class.extend({
 		includes: [L.Mixin.Events],
@@ -39,8 +40,8 @@ import L from 'leaflet'
 			this._initDom();
 
 			// Any shapes that were added before this was added to the map need to have their onAdd called.
-			for (var i in this._shapes) {
-				this._shapes[i].onAdd(this);
+			for (let i of this._shapes) {
+				i.onAdd(this);
 			}
 
 			// Call any children that want to add their own shapes.
@@ -64,8 +65,8 @@ import L from 'leaflet'
 		redraw: function () {
 			if (this._map) {
 				this._update();
-				for (var i in this._shapes) {
-					this._shapes[i].redraw();
+				for (let i of this._shapes) {
+					i.redraw();
 				}
 			}
 			return this;
@@ -187,8 +188,8 @@ import L from 'leaflet'
 				dom.removeAttribute('patternTransform');
 			}
 
-			for (var i in this._shapes) {
-				this._shapes[i]._updateStyle();
+			for (let i of this._shapes) {
+				i._updateStyle();
 			}
 		}
 	});
