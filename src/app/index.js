@@ -16,7 +16,13 @@ import effects from './effects'
 
 import {create} from './store'
 
-import {Link, Router, Route, browserHistory} from 'react-router'
+import {
+	Link,
+	Router,
+	Route,
+	//IndexRoute,
+	browserHistory,
+} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 
 const initialState = {}
@@ -33,21 +39,23 @@ const DevTools = createDevTools(
 const store = create(reducer, initialState, [DevTools.instrument()], effects())
 const history = syncHistoryWithStore(browserHistory, store)
 
-const Projects = () => (<div>
-	[List with all projects]
+const Projects = () => (
+	<div>
+		[List with all projects]
 
-	<ul>
-		<li><Link to="/">Close</Link></li>
-	</ul>
-</div>)
+		<ul>
+			<li><Link to="/">Close</Link></li>
+		</ul>
+	</div>
+)
 
 ReactDOM.render(
 	<Provider store={store}>
 		<div>
 			<Router history={history}>
 				<Route path="/" component={App}>
-					<Route path="/projects" component={Projects}/>
-					<Route path="/projects/:name" component={Project}/>
+					<Route path="projects" component={Projects}/>
+					<Route path="projects/:name" component={Project}/>
 				</Route>
 			</Router>
 
