@@ -34,8 +34,8 @@ const api = {
 							//area: area.geometry.coordinates,
 							area: area,
 							name: point.properties.name,
-							title: '<p>Title</p>',
-							content: '<p>Content</p>',
+							content: point.properties.content,
+							contentUrl: point.properties.contentUrl,
 						}))
 
 					return {items, total: 100500}
