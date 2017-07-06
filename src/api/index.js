@@ -17,7 +17,7 @@ function zipBy (key, list1, list2) {
 	})
 }
 
-const zip = zipBy.bind(null, i => i.properties.name)
+const zip = (list1, list2) => zipBy(i => i.properties.name, list1, list2)
 
 const api = {
 	projects: {
