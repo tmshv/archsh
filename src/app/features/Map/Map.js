@@ -20,12 +20,7 @@ const flagIcon = Leaflet.icon({
 })
 
 export default class MyMap extends Component {
-	constructor(props) {
-		super(props)
-		this.onMapClick = this.onMapClick.bind(this)
-	}
-
-	onMapClick() {
+    onMapClick = () => {
 		const {onSelect} = this.props
 		onSelect()
 	}
@@ -36,9 +31,9 @@ export default class MyMap extends Component {
         const area = activeProject
             ? activeProject.area
             : null
-        const areaBounds = activeProject
+        const areaBounds = area
 			? Leaflet
-				.geoJSON(activeProject.area)
+				.geoJSON(area)
 				.getBounds()
 			: null
 		const options = {
@@ -46,6 +41,7 @@ export default class MyMap extends Component {
 			center: position,
 			maxBounds: bounds,
 			minZoom: 14,
+            maxZoom: 17,
 			zoom: 15,
 			zoomControl: false,
 			onClick: this.onMapClick,
@@ -64,6 +60,18 @@ export default class MyMap extends Component {
             // fillPattern: stripes,
 		}
 
+		const markers = projects
+            .map((project, index) => (
+				<Marker key={index}
+						icon={flagIcon}
+						position={project.location}
+						onClick={(e) => {
+                            onSelect()
+                            onSelect(project)
+                        }}
+				/>
+            ))
+
 		return (
 			<Map {...options}>
 				<TileLayer
@@ -76,23 +84,11 @@ export default class MyMap extends Component {
 					<GeoJSON data={area} style={areaStyle}/>
 				)}
 
-				<LayerGroup>
-					{projects
-						.map((project, index) => (
-							<Marker key={index}
-									icon={flagIcon}
-									position={project.location}
-									onClick={(e) => {
-                                        onSelect()
-                                        onSelect(project)
-									}}
-							/>
-						))}
-
-					{/*<Popup>*/}
-					{/*<span>A pretty CSS3 popup.<br/>Easily customizable.</span>*/}
-					{/*</Popup>*/}
-				</LayerGroup>
+				{!markers.length ? null : (
+					<LayerGroup>
+                        {markers}
+					</LayerGroup>
+				)}
 			</Map>
 		)
 	}
