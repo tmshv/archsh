@@ -26,17 +26,19 @@ class Project extends Component {
         const {project} = this.props
         if (!project) return null
 
-        const Content = project.content
+        const content = project.content
             ? <HTML>{project.content}</HTML>
             : <Loader/>
 
-        return (<div>
-            <Content/>
-            <ul>
-                <li><Link to="/projects">All Projects</Link></li>
-                <li><Link to="/">Close</Link></li>
-            </ul>
-        </div>)
+        return (
+            <div>
+                {content}
+                <ul>
+                    <li><Link to="/projects">All Projects</Link></li>
+                    <li><Link to="/">Close</Link></li>
+                </ul>
+            </div>
+        )
     }
 }
 
