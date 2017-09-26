@@ -31,7 +31,12 @@ class App extends Component {
 	}
 
 	componentDidUpdate(){
-		const projectName = this.props.params.name
+        const params = this.props.params
+        const {name, year} = params
+
+        const projectName = name && year
+            ? `${year}/${name}`
+            : null
 		this.props.focusProject(projectName)
 	}
 

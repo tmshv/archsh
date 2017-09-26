@@ -20,7 +20,6 @@ import {
 	Link,
 	Router,
 	Route,
-	//IndexRoute,
 	browserHistory,
 } from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
@@ -55,7 +54,7 @@ ReactDOM.render(
 			<Router history={history}>
 				<Route path="/" component={App}>
 					<Route path="projects" component={Projects}/>
-					<Route path="projects/:name" component={Project}/>
+					<Route path="projects/:year/:name" component={Project}/>
 				</Route>
 			</Router>
 
