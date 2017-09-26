@@ -10,6 +10,24 @@ export function zip(list1, list2) {
 	return small.map((s, i) => [s, other[i]])
 }
 
+/**
+ * f(g, [x, y, z, ...], [m, n, k, ...]) -> [[x, m], [y, n], [z, k], ...] based on G
+ * @param list1
+ * @param list2
+ */
+export function zipBy (key, list1, list2) {
+    const [small, other] = list1.length <= list2.length
+        ? [list1, list2]
+        : [list2, list1]
+
+    return small.map(s => {
+        const k = key(s)
+        const o = other.find(i => key(i) === k)
+        return [s, o]
+    })
+}
+
+
 export function arraysIsEqual(list1, list2){
 	if (list1.length !== list2.length) return false
 
