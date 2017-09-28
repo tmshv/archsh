@@ -8,7 +8,7 @@ const api = {
 	projects: {
 		fetch () {
 			return Promise
-				.resolve(['/points.geojson', '/areas.geojson'])
+                .resolve(['/data/points.geojson', '/data/areas.geojson'])
 				.then(mapAll(url => fetch(url)))
 				.then(mapAll(res => res.json()))
 				.then(mapAll(i => i.features))
@@ -17,12 +17,10 @@ const api = {
 
 					const items = zip(points, areas)
 						.map(([point, area]) => ({
+                            ...point.properties,
+
 							location: point.geometry.coordinates.reverse(),
-							//area: area.geometry.coordinates,
 							area: area,
-							name: point.properties.name,
-							content: point.properties.content,
-							contentUrl: point.properties.contentUrl,
 						}))
 
 					return {items, total: 100}

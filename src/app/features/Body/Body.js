@@ -6,11 +6,9 @@ class Body extends Component {
 	render() {
 		return (
 			<div className="Body">
-				<div className="Body-content">
-					<main>
-						{this.props.children}
-					</main>
-				</div>
+				<main className="Body-content">
+                    {this.props.children}
+				</main>
 			</div>
 		)
 	}

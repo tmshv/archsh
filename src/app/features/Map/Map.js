@@ -40,7 +40,7 @@ export default class MyMap extends Component {
 			animate: true,
 			center: position,
 			maxBounds: bounds,
-			minZoom: 14,
+			minZoom: 15,
             maxZoom: 17,
 			zoom: 15,
 			zoomControl: false,

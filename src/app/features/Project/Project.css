@@ -1,0 +1,56 @@
+.Project {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.ProjectBody {
+    /*flex: 1;*/
+    overflow: auto;
+
+    height: 100%;
+
+    /*background-color: gold;*/
+}
+
+.Project header h1 {
+    padding: 5px 10px 0;
+}
+
+.Project header hr {
+    /*padding: 5px 10px 0;*/
+    /*width: 90%;*/
+    margin: 0 10px;
+
+    border: none;
+    border-top: 1px solid #d9d9d9;
+}
+
+.Project article {
+    --padding: 0 10px;
+
+    /*margin-top: 70px;*/
+    margin-bottom: 10px;
+
+    width: 100%;
+}
+
+.Project article p {
+    padding: var(--padding);
+}
+
+.Project article figure {
+    margin: 0;
+    padding: var(--padding);
+}
+
+.Project article .borderless {
+    --padding: 0;
+}
+
+.Project article img {
+    width: 100%;
+
+    margin: 0;
+}
