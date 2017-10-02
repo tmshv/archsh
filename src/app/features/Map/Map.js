@@ -20,9 +20,37 @@ const flagIcon = Leaflet.icon({
 })
 
 export default class MyMap extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            frameWidth: 800,
+        }
+    }
+
     onMapClick = () => {
 		const {onSelect} = this.props
 		onSelect()
+	}
+
+    componentDidMount() {
+        const frameWidth = window.innerWidth
+
+        this.setState({
+            frameWidth,
+            framePadding: 50,
+        })
+    }
+
+    createBoundsOptions() {
+        const {frameWidth, framePadding} = this.state
+        const frameSizeMultiply = 0.6;
+
+    	return {
+            paddingTopLeft: [framePadding, framePadding],
+            paddingBottomRight: [frameWidth * frameSizeMultiply + framePadding, framePadding],
+        }
 	}
 
 	render() {
@@ -45,10 +73,7 @@ export default class MyMap extends Component {
 			zoom: 15,
 			zoomControl: false,
 			onClick: this.onMapClick,
-            boundsOptions: {
-				paddingTopLeft: [50, 40],
-				paddingBottomRight: [1280 / 2, 10],
-			},
+            boundsOptions: this.createBoundsOptions(),
 		}
 		if(areaBounds) options.bounds = areaBounds
 
