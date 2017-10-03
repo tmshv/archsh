@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import {Link} from 'react-router'
 
 import * as actions from '../App/duck'
 import {bindActionCreators} from 'redux'
@@ -8,6 +7,10 @@ import {connect} from 'react-redux'
 import './Project.css'
 
 const Loader = ({text = 'Loading'}) => <i>{text}</i>
+
+const HTML = ({children}) => (
+	<div dangerouslySetInnerHTML={{__html: children}}/>
+)
 
 function mapStateToProps(state) {
 	return {
@@ -18,10 +21,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(actions, dispatch)
 }
-
-const HTML = ({children}) => (
-	<div dangerouslySetInnerHTML={{__html: children}}/>
-)
 
 class Project extends Component {
 	constructor(props) {
@@ -64,7 +63,6 @@ class Project extends Component {
 
 	render() {
 		const {content} = this.state
-
 		if (!content) {
 			return (
 				<div className="Project">
@@ -73,26 +71,13 @@ class Project extends Component {
 			)
 		}
 
-		const {project} = this.props
 		return (
 			<div className="Project">
-				<header>
-					<h1>{project.title}</h1>
-					<hr/>
-				</header>
-
 				<div className="ProjectBody">
 					<HTML>
 					{content}
 					</HTML>
 				</div>
-
-				{/*<div>*/}
-				{/*<ul>*/}
-				{/*<li><Link to="/projects">All Projects</Link></li>*/}
-				{/*<li><Link to="/">Close</Link></li>*/}
-				{/*</ul>*/}
-				{/*</div>*/}
 			</div>
 		)
 	}
