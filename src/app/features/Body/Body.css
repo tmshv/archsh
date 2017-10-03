@@ -19,12 +19,12 @@
 
 .Body-content {
     min-width: 25em;
-    width: 40%;
+    width: var(--content-width);
     /*height: 100%;*/
 
     pointer-events: auto;
 
-    margin: 0 var(--module-m) 0 0;
+    margin: 0 var(--module-m);
     background-color: white;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 

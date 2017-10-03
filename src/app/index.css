@@ -1,4 +1,8 @@
 :root {
+    --content-width-state-normal: 60%;
+    --content-width-state-full: 80%;
+    --content-width: var(--content-width-state-normal);
+
     --module-m: .5em;
 }
 
