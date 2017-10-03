@@ -3,6 +3,9 @@
     --margin: 0 var(--module-m);
     --max-height: calc(100% - 2em);
 
+    --transition-time: 100ms;
+    --transition-ease: ease-out;
+
     width: 100%;
     /*height: calc(100% - 2em);*/
 
@@ -19,6 +22,8 @@
 
     display: flex;
     flex-direction: row-reverse;
+
+    transition: top var(--transition-time) var(--transition-ease), height var(--transition-time) var(--transition-ease);
 }
 
 .Body--full {
@@ -41,6 +46,8 @@
 
     /*overflow: auto;*/
     overflow: hidden;
+
+    transition: width 300ms var(--transition-ease), margin var(--transition-time) var(--transition-ease);
 }
 
 .Article-element {
