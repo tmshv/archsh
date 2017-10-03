@@ -10,6 +10,7 @@ import {connect} from 'react-redux'
 import * as actions from './duck'
 
 import {routerActions} from 'react-router-redux'
+import {title as defaultTitle} from '../../../config'
 
 function mapStateToProps(state) {
 	return {
@@ -50,6 +51,9 @@ class App extends Component {
 				return null
 			}
 		}
+		const title = activeProject
+			? activeProject.title
+			: defaultTitle
 
 		const onClick = (project) => {
 			const old = currentPath()
@@ -63,6 +67,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<AppWrapper>
+				<AppWrapper title={title}>
 					{children
 						? <Body>{children}</Body>
 						: null
