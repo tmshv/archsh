@@ -22,79 +22,79 @@ const flagIcon = Leaflet.icon({
 
 export default class MyMap extends Component {
 
-    constructor(props) {
-        super(props)
+	constructor(props) {
+		super(props)
 
-        this.state = {
-            frameWidth: 800,
-        }
-    }
+		this.state = {
+			frameWidth: 800,
+		}
+	}
 
-    onMapClick = () => {
+	onMapClick = () => {
 		const {onSelect} = this.props
 		onSelect()
 	}
 
-    componentDidMount() {
-        const frameWidth = window.innerWidth
+	componentDidMount() {
+		const frameWidth = window.innerWidth
 
-        this.setState({
-            frameWidth,
-            framePadding: 50,
-        })
-    }
+		this.setState({
+			frameWidth,
+			framePadding: 50,
+		})
+	}
 
-    createBoundsOptions() {
-        const {frameWidth, framePadding} = this.state
-        const frameSizeMultiply = 0.6;
+	createBoundsOptions() {
+		const {frameWidth, framePadding} = this.state
+		const frameSizeMultiply = 0.6
 
-    	return {
-            paddingTopLeft: [framePadding, framePadding],
-            paddingBottomRight: [frameWidth * frameSizeMultiply + framePadding, framePadding],
-        }
+		return {
+			paddingTopLeft: [framePadding, framePadding],
+			paddingBottomRight: [frameWidth * frameSizeMultiply + framePadding, framePadding],
+		}
 	}
 
 	render() {
 		const {projects, onSelect, activeProject} = this.props
 
-        const area = activeProject
-            ? activeProject.area
-            : null
-        const areaBounds = area
-            ? getBoundsOf(area)
+		const area = activeProject
+			? activeProject.area
+			: null
+		const areaBounds = area
+			? getBoundsOf(area)
 			: null
 		const options = {
 			animate: true,
 			center: position,
 			maxBounds: bounds,
 			minZoom: 15,
-            maxZoom: 17,
+			maxZoom: 17,
 			zoom: 15,
 			zoomControl: false,
 			onClick: this.onMapClick,
-            boundsOptions: this.createBoundsOptions(),
+			boundsOptions: this.createBoundsOptions(),
 		}
-		if(areaBounds) options.bounds = areaBounds
+		if (areaBounds) options.bounds = areaBounds
 
 		const areaStyle = {
-            fillColor: '#e11e1c',
+			fillColor: '#e11e1c',
 			weight: 2,
-            color: '#e11e1c',
+			color: '#e11e1c',
 			fillOpacity: 0.1,
-            // fillPattern: stripes,
+			// fillPattern: stripes,
 		}
 
 		const markers = projects
-            .map((project, index) => (
+			.map((project, index) => (
 				<Marker key={index}
 						icon={flagIcon}
 						position={project.location}
 						onClick={(e) => {
-                            onSelect()
-                            onSelect(project)
-                        }}
+							onSelect()
+							onSelect(project)
+						}}
 				/>
-            ))
+			))
 
 		return (
 			<Map {...options}>
@@ -110,7 +110,7 @@ export default class MyMap extends Component {
 
 				{!markers.length ? null : (
 					<LayerGroup>
-                        {markers}
+						{markers}
 					</LayerGroup>
 				)}
 			</Map>
