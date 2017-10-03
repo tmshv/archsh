@@ -78,13 +78,13 @@ class App extends Component {
 
 		return (
 			<div className="App">
+				<Map projects={projects} onSelect={this.onSelect} activeProject={activeProject}/>
 				<AppWrapper title={title}>
 					{children
 						? <Body>{children}</Body>
 						: null
 					}
 				</AppWrapper>
-				<Map projects={projects} onSelect={this.onSelect} activeProject={activeProject}/>
 			</div>
 		)
 	}
