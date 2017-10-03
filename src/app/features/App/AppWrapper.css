@@ -29,7 +29,7 @@
     pointer-events: auto;
 }
 
-.AppWrapper-header h2 {
+.AppWrapper-header h1 {
     text-align: center;
     margin: 0;
     padding: .5em 0 .4em;

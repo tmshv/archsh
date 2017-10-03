@@ -4,7 +4,7 @@ import './AppWrapper.css'
 const App = ({title, children}) => (
 	<div className="AppWrapper">
 		<header className="AppWrapper-header">
-			<h2>{title}</h2>
+			<h1>{title}</h1>
 		</header>
 		<div className="AppWrapper-body">
 			<div className="AppWrapper-content">
