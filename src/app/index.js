@@ -1,5 +1,4 @@
 import './index.css'
-import '../lib/LeafletPattern'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
