@@ -15,6 +15,7 @@ import {title as defaultTitle} from '../../../config'
 import {debounce} from '../../../lib/fn'
 const hit = debounce(50, path => ym('hit', path))
 
+const projectPath = project => `/projects/${project.name}`
 function mapStateToProps(state) {
 	return {
 		projects: state.app.projects.items,
@@ -49,28 +50,32 @@ class App extends Component {
 			? `${year}/${name}`
 			: null
 	}
+
+	getCurrentPath() {
+		try {
+			return this.props.routing.locationBeforeTransitions.pathname
+		} catch (e) {
+			return null
+		}
+	}
+
+	onSelect = (project) => {
+		const old = this.getCurrentPath()
+		const path = project
+			? projectPath(project)
+			: '/'
+
+		if (path !== old) this.props.push(path)
+	}
+
 	render() {
 		const {children, projects, activeProject} = this.props
 
-		const currentPath = () => {
-			try {
-				return this.props.routing.locationBeforeTransitions.pathname
-			} catch (e) {
-				return null
-			}
-		}
 		const title = activeProject
 			? activeProject.title
 			: defaultTitle
 
-		const onClick = (project) => {
-			const old = currentPath()
-			const url = project
-				? `/projects/${project.name}`
-				: '/'
 
-			if (url !== old) this.props.push(url)
-		}
 
 		return (
 			<div className="App">
@@ -81,7 +86,7 @@ class App extends Component {
 						: null
 					}
 				</AppWrapper>
-				<Map projects={projects} onSelect={onClick} activeProject={activeProject}/>
+				<Map projects={projects} onSelect={this.onSelect} activeProject={activeProject}/>
 			</div>
 		)
 	}
