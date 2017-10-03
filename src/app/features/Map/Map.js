@@ -20,6 +20,14 @@ const flagIcon = Leaflet.icon({
 	popupAnchor: [0, -30]
 })
 
+const areaStyle = {
+	fillColor: '#e11e1c',
+	weight: 2,
+	color: '#e11e1c',
+	fillOpacity: 0.1,
+	// fillPattern: stripes,
+}
+
 export default class MyMap extends Component {
 
 	constructor(props) {
@@ -75,14 +83,6 @@ export default class MyMap extends Component {
 			boundsOptions: this.createBoundsOptions(),
 		}
 		if (areaBounds) options.bounds = areaBounds
-
-		const areaStyle = {
-			fillColor: '#e11e1c',
-			weight: 2,
-			color: '#e11e1c',
-			fillOpacity: 0.1,
-			// fillPattern: stripes,
-		}
 
 		const markers = projects
 			.map((project, index) => (
