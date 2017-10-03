@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom'
 import App from './features/App'
 import Project from './features/Project'
 
+import {YMInitializer} from 'react-yandex-metrika'
+
 import {createDevTools} from 'redux-devtools'
 import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
@@ -23,6 +25,7 @@ import {
 	browserHistory,
 } from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
+import {yandexMetrikaAccount} from '../config'
 
 const initialState = {}
 
@@ -51,6 +54,8 @@ const Projects = () => (
 ReactDOM.render(
 	<Provider store={store}>
 		<div>
+			<YMInitializer accounts={[yandexMetrikaAccount]} version="2"/>
+			
 			<Router history={history}>
 				<Route path="/" component={App}>
 					<Route path="projects" component={Projects}/>

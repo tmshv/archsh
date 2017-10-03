@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ym from 'react-yandex-metrika'
 import './App.css'
 
 import Map from '../Map'
@@ -11,6 +12,8 @@ import * as actions from './duck'
 
 import {routerActions} from 'react-router-redux'
 import {title as defaultTitle} from '../../../config'
+import {debounce} from '../../../lib/fn'
+const hit = debounce(50, path => ym('hit', path))
 
 function mapStateToProps(state) {
 	return {
@@ -39,6 +42,8 @@ class App extends Component {
             ? `${year}/${name}`
             : null
 		this.props.focusProject(projectName)
+
+		hit(this.props.location.pathname)
 	}
 
 	render() {
