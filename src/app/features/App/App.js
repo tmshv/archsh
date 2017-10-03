@@ -16,6 +16,7 @@ import {debounce} from '../../../lib/fn'
 const hit = debounce(50, path => ym('hit', path))
 
 const projectPath = project => `/projects/${project.name}`
+
 function mapStateToProps(state) {
 	return {
 		projects: state.app.projects.items,
@@ -75,11 +76,8 @@ class App extends Component {
 			? activeProject.title
 			: defaultTitle
 
-
-
 		return (
 			<div className="App">
-				<AppWrapper>
 				<AppWrapper title={title}>
 					{children
 						? <Body>{children}</Body>
