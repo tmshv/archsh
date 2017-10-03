@@ -21,6 +21,7 @@ function mapStateToProps(state) {
 	return {
 		projects: state.app.projects.items,
 		activeProject: state.app.projects.activeProject,
+		fullPage: state.app.page.fullPage,
 	}
 }
 
@@ -71,6 +72,8 @@ class App extends Component {
 
 	render() {
 		const {children, projects, activeProject} = this.props
+		const {fullPage, toggleFullPage} = this.props
+		const showControls = Boolean(activeProject)
 
 		const title = activeProject
 			? activeProject.title
@@ -79,9 +82,13 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Map projects={projects} onSelect={this.onSelect} activeProject={activeProject}/>
-				<AppWrapper title={title}>
+				<AppWrapper
+					title={title}
+					showControls={showControls}
+					onToggleFullPage={toggleFullPage}
+				>
 					{children
-						? <Body>{children}</Body>
+						? <Body fullPage={fullPage}>{children}</Body>
 						: null
 					}
 				</AppWrapper>

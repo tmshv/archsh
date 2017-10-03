@@ -17,7 +17,7 @@
     pointer-events: none;
 }
 
-.AppWrapper-header {
+.AppWrapperHeader {
     background-color: rgba(34, 34, 34, 0.95);
     color: #ebebeb;
 
@@ -27,9 +27,16 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 
     pointer-events: auto;
+
+    display: flex;
+    align-items: center;
 }
 
-.AppWrapper-header h1 {
+.AppWrapperHeader-main {
+    flex: 1;
+}
+
+.AppWrapperHeader h1 {
     text-align: center;
     margin: 0;
     padding: .5em 0 .4em;
@@ -68,4 +75,17 @@
 
 .Foo {
     padding: 1em;
+}
+
+.controls {
+    margin: 0 15px;
+}
+
+.controls a{
+    color: #bbb;
+    text-decoration: none;
+}
+
+.controls a:hover{
+    color: white;
 }

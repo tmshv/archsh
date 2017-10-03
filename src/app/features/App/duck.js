@@ -4,6 +4,7 @@ import {pack} from '../../../lib/fn'
 
 const FETCH_PROJECTS = 'arch/app/FETCH_PROJECTS'
 const FOCUS_PROJECT = 'arch/app/FOCUS_PROJECT'
+const TOGGLE_FULL_PAGE = 'arch/app/TOGGLE_FULL_PAGE'
 
 export function fetchProjects() {
 	return {
@@ -20,10 +21,20 @@ export function focusProject(projectName) {
 	}
 }
 
+export function toggleFullPage() {
+	return {
+		type: TOGGLE_FULL_PAGE,
+	}
+}
+
 const init = {
 	items: [],
 	total: 0,
 	activeProject: null,
+}
+
+const initPage = {
+	fullPage: false,
 }
 
 function projects(state = init, action) {
@@ -45,6 +56,32 @@ function projects(state = init, action) {
 	}
 }
 
+function page(state = initPage, action) {
+	switch (action.type) {
+		case TOGGLE_FULL_PAGE: {
+			const fullPage = !state.fullPage
+
+			return {...state, fullPage}
+		}
+
+		case FOCUS_PROJECT: {
+			let fullPage = state.fullPage
+
+			const projectName = action.projectName
+			fullPage = !projectName
+				? false
+				: fullPage
+
+			return {...state, fullPage}
+		}
+
+		default:
+			return state
+	}
+}
+
+
 export default combineReducers({
-	projects
+	projects,
+	page,
 })
