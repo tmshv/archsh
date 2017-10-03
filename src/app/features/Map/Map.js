@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Leaflet from 'leaflet'
 import {Map, Marker, TileLayer, GeoJSON, LayerGroup} from 'react-leaflet'
+import {getBoundsOf} from '../../../lib/geo'
 
 const tilePattern = 'http://{s}.tiles.shlisselburg.org/oreshek/1.0/{z}/{x}/{y}.png'
 const attr = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
@@ -60,9 +61,7 @@ export default class MyMap extends Component {
             ? activeProject.area
             : null
         const areaBounds = area
-			? Leaflet
-				.geoJSON(area)
-				.getBounds()
+            ? getBoundsOf(area)
 			: null
 		const options = {
 			animate: true,
