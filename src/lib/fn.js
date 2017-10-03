@@ -55,19 +55,53 @@ export function exist(value){
 	])
 }
 
+/**
+ * f(g) -> m(x) -> g(x) -> x
+ *
+ * @param fn
+ * @returns {function(*)}
+ */
 export function pass(fn) {
-	return data => {
-		fn()
-		return data
+	return x => {
+		fn(x)
+		return x
 	}
 }
 
+/**
+ * f(n) -> g(x) -> {[n]: x}
+ *
+ * @param name
+ * @returns {function(*): {}}
+ */
 export function pack(name) {
 	//return value => {[name]: value}
 
-	return value => {
-		const o = {}
-		o[name] = value
-		return o
+	return value => ({[name]: value})
+}
+
+/**
+ * f(g, m, ...) -> g . m . ...
+ *
+ * @param functions
+ * @returns {function(*=): *}
+ */
+export function compose(...functions) {
+	const fs = functions.reverse()
+	return (...value) => fs.reduce((acc, fn) => fn(...acc), value)
+}
+
+/**
+ * f(t, g) -> g(x) after t milliseconds
+ *
+ * @param ms
+ * @param callback
+ * @returns {function(...[*])}
+ */
+export function debounce(ms, callback) {
+	let id = 0
+	return (...args) => {
+		clearTimeout(id)
+		id = setTimeout(callback, ms, ...args)
 	}
 }
