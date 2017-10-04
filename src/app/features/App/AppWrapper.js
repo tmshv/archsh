@@ -26,6 +26,14 @@ const Head = ({title, onToggleFullPage, showControls = false}) => (
 	</header>
 )
 
+const Body = ({children}) => (
+	<div className="AppWrapperBody">
+		<div className="AppWrapperContent">
+			{children}
+		</div>
+	</div>
+)
+
 const AppWrapper = ({title, children, showControls, onToggleFullPage}) => (
 	<div className="AppWrapper">
 		<Head
@@ -34,11 +42,7 @@ const AppWrapper = ({title, children, showControls, onToggleFullPage}) => (
 			onToggleFullPage={onToggleFullPage}
 		/>
 
-		<div className="AppWrapper-body">
-			<div className="AppWrapper-content">
-				{children}
-			</div>
-		</div>
+		<Body>{children}</Body>
 	</div>
 )
 
