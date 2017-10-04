@@ -1,6 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router'
+
 import './AppWrapper.css'
+import './AppWrapperHeader.css'
+import './AppWrapperBody.css'
+import './AppWrapperContent.css'
 
 const Head = ({title, onToggleFullPage, showControls = false}) => (
 	<header className="AppWrapperHeader">
