@@ -6,7 +6,7 @@ import './AppWrapperHeader.css'
 import './AppWrapperBody.css'
 import './AppWrapperContent.css'
 
-const Head = ({title, onToggleFullPage, showControls = false}) => (
+const Head = ({title, onToggleFullPage, showFullPageToggle, showControls = false}) => (
 	<header className="AppWrapperHeader">
 		<div>
 			{!showControls ? null : (
@@ -23,7 +23,9 @@ const Head = ({title, onToggleFullPage, showControls = false}) => (
 		<div>
 			{!showControls ? null : (
 				<div className="controls">
-					<button onClick={onToggleFullPage}>Full</button>
+					{!showFullPageToggle ? null: (
+						<button onClick={onToggleFullPage}>Full</button>
+					)}
 				</div>
 			)}
 		</div>
@@ -38,12 +40,13 @@ const Body = ({children}) => (
 	</div>
 )
 
-const AppWrapper = ({title, children, showControls, onToggleFullPage}) => (
+const AppWrapper = ({title, children, showControls, showFullPageToggle, onToggleFullPage}) => (
 	<div className="AppWrapper">
 		<Head
 			title={title}
 			showControls={showControls}
 			onToggleFullPage={onToggleFullPage}
+			showFullPageToggle={showFullPageToggle}
 		/>
 
 		<Body>{children}</Body>

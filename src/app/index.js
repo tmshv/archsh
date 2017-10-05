@@ -25,6 +25,12 @@ import {
 } from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {yandexMetrikaAccount} from '../config'
+import {isLandscapeMedia} from '../lib/device'
+import {
+	changePageOrientation,
+	PAGE_ORIENTATION_LANDSCAPE,
+	PAGE_ORIENTATION_PORTRAIT,
+} from './features/App/duck'
 
 const initialState = {}
 
@@ -67,3 +73,11 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 )
+
+isLandscapeMedia.addListener((event) => {
+	const orientation = event.matches
+		? PAGE_ORIENTATION_LANDSCAPE
+		: PAGE_ORIENTATION_PORTRAIT
+
+	store.dispatch(changePageOrientation(orientation))
+})

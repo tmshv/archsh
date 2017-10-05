@@ -29,36 +29,18 @@ const areaStyle = {
 }
 
 export default class MyMap extends Component {
-
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			frameWidth: 800,
-		}
-	}
-
 	onMapClick = () => {
 		const {onSelect} = this.props
 		onSelect()
 	}
 
-	componentDidMount() {
-		const frameWidth = window.innerWidth
-
-		this.setState({
-			frameWidth,
-			framePadding: 50,
-		})
-	}
-
 	createBoundsOptions() {
-		const {frameWidth, framePadding} = this.state
-		const frameSizeMultiply = 0.6
+		const {projectBounds} = this.props
+		let [paddingTopLeft, paddingBottomRight] = projectBounds
 
 		return {
-			paddingTopLeft: [framePadding, framePadding],
-			paddingBottomRight: [frameWidth * frameSizeMultiply + framePadding, framePadding],
+			paddingTopLeft,
+			paddingBottomRight,
 		}
 	}
 

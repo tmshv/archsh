@@ -5,9 +5,10 @@ import './Body.css'
 
 class Body extends Component {
 	render() {
-		const {fullPage} = this.props
+		const {fullPage, vertical} = this.props
 		const styleClass = classNames('Body', {
-			'Body--full': fullPage
+			'Body--vertical': vertical,
+			'Body--full': fullPage,
 		})
 
 		return (
