@@ -14,7 +14,7 @@ class Body extends Component {
 		return (
 			<div className={styleClass}>
 				<main className="Body-content">
-                    {this.props.children}
+					{this.props.children}
 				</main>
 			</div>
 		)
