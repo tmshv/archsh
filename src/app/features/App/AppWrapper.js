@@ -9,11 +9,6 @@ import './AppWrapperContent.css'
 const Head = ({title, onToggleFullPage, showFullPageToggle, showControls = false}) => (
 	<header className="AppWrapperHeader">
 		<div>
-			{!showControls ? null : (
-				<div className="controls">
-					<Link to="/">←</Link>
-				</div>
-			)}
 		</div>
 
 		<div className="AppWrapperHeader-main">
