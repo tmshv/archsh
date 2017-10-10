@@ -6,17 +6,21 @@
 }
 
 .ProjectBody {
-    overflow: auto;
+    /*overflow: auto;*/
 
-    height: 100%;
+    /*height: 100%;*/
+    /*height: 100%;*/
 
     margin: 10px 0;
 }
 
 .Project article {
+    --v: 20px;
     --padding: 0 10px;
 
     width: 100%;
+
+    line-height: 24px;
 }
 
 .Project article p {
@@ -26,6 +30,17 @@
 .Project article figure {
     margin: 0;
     padding: var(--padding);
+}
+
+.Project article div {
+    margin-bottom: var(--v);
+}
+
+.Project article blockquote {
+    margin: var(--padding);
+
+    background: #ededed;
+    padding: var(--v);
 }
 
 .Project article .borderless {

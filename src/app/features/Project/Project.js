@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import './Project.css'
+import api from '../../../api/index'
 
 const Loader = ({text = 'Loading'}) => <i>{text}</i>
 
@@ -50,9 +51,7 @@ class Project extends Component {
 			this.setState({
 				contentUrl: project.contentUrl,
 			})
-			// return
-			fetch(project.contentUrl)
-				.then(res => res.text())
+			api.projects.fetchContent(project.contentUrl)
 				.then(content => {
 					this.setState({
 						content,
