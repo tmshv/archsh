@@ -1,4 +1,5 @@
 import {zipBy} from '../lib/fn';
+import {projectFiles} from '../config'
 
 const mapAll = fn => list => Promise.all(
 	list.map(fn)
@@ -8,7 +9,7 @@ const api = {
 	projects: {
 		fetch () {
 			return Promise
-                .resolve(['/data/points.geojson', '/data/areas.geojson'])
+				.resolve(projectFiles)
 				.then(mapAll(url => fetch(url)))
 				.then(mapAll(res => res.json()))
 				.then(mapAll(i => i.features))
