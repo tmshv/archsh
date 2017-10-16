@@ -1,10 +1,47 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router'
 
 import './AppWrapper.css'
 import './AppWrapperHeader.css'
 import './AppWrapperBody.css'
 import './AppWrapperContent.css'
+import './Icon.css'
+
+const Icon = ({children: iconName}) => (
+	<span className={`Icon ${iconName}`}/>
+)
+
+class Toggle extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			value: true
+		}
+	}
+
+	onClick = () => {
+		const {value} = this.state
+		const {onClick} = this.props
+
+		this.setState({
+			value: !value,
+		})
+		onClick(!value)
+	}
+
+	render() {
+		const {value} = this.state
+		const icon = value
+			? 'IconFullScreenOn'
+			: 'IconFullScreenOff'
+
+		return (
+			<button className="InvisibleButton" onClick={this.onClick}>
+				<Icon>{icon}</Icon>
+			</button>
+		)
+	}
+}
 
 const Head = ({title, onToggleFullPage, showFullPageToggle, showControls = false}) => (
 	<header className="AppWrapperHeader">
@@ -19,7 +56,7 @@ const Head = ({title, onToggleFullPage, showFullPageToggle, showControls = false
 			{!showControls ? null : (
 				<div className="controls">
 					{!showFullPageToggle ? null: (
-						<button onClick={onToggleFullPage}>Full</button>
+						<Toggle onClick={onToggleFullPage}/>
 					)}
 				</div>
 			)}
