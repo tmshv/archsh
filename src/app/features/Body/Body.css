@@ -1,56 +1,68 @@
 .Body {
-    width: 100%;
-    height: calc(100% - 2em);
+    --top: var(--module-m);
+    --margin: 0 var(--module-m);
+    --body-max-height: calc(100% - 2em);
 
-    pointer-events: none;
+    --transition-time: 100ms;
+    --transition-ease: ease-out;
+
+    --flex-direction: row-reverse;
+
+    --max-width: var(--content-width);
+    --max-height: inherit;
+
+    width: 100%;
+    height: var(--body-max-height);
 
     position: absolute;
-    top: 1em;
+    top: var(--top);
 
     margin: 0;
+
+    pointer-events: none;
     z-index: 500;
 
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: var(--flex-direction);
+
+    transition: top var(--transition-time) var(--transition-ease), height var(--transition-time) var(--transition-ease);
+}
+
+.Body--vertical {
+    --flex-direction: column-reverse;
+
+    --max-width: inherit;
+    --max-height: var(--content-width);
+}
+
+.Body--full {
+    --content-width: var(--content-width-state-full);
+    --top: 0;
+    --margin: 0;
+    --body-max-height: 100%;
 }
 
 .Body-content {
-    min-width: 25em;
-    width: 40%;
-    height: 100%;
+    flex: 1;
+
+    max-width: var(--max-width);
+    max-height: var(--max-height);
 
     pointer-events: auto;
 
-    margin: 0 1em 0 0;
+    margin: var(--margin);
     background-color: white;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 
     overflow: auto;
+
+    transition: width 200ms var(--transition-ease), margin var(--transition-time) var(--transition-ease);
 }
 
 .Article-element {
     padding: 0.75em 1em 0;
 }
 
-main {
-    display: flex;
-}
-
-main h2 {
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-
-    position: relative;
-}
-
 .Body .fotorama__stage {
     background-color: #222;
-}
-
-.Head {
-    position: fixed;
-    background-color: white;
-
-    z-index: 10;
 }

@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
+import classNames from 'classnames'
 
 import './Body.css'
 
 class Body extends Component {
 	render() {
-		return (
-			<div className="Body">
-				<div className="Body-content">
-					<main>
+		const {fullPage, vertical} = this.props
+		const styleClass = classNames('Body', {
+			'Body--vertical': vertical,
+			'Body--full': fullPage,
+		})
 
-					</main>
-				</div>
+		return (
+			<div className={styleClass}>
+				<main className="Body-content">
+					{this.props.children}
+				</main>
 			</div>
 		)
 	}

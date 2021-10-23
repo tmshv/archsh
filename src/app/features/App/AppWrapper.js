@@ -1,18 +1,88 @@
-import React from 'react'
-import './AppWrapper.css'
+import React, {Component} from 'react'
+import {Link} from 'react-router'
 
-const App = ({children}) => (
-	<div className="AppWrapper">
-		<header className="AppWrapper-header">
-			<h2>Архитектурные проекты Шлиссельбурга</h2>
-		</header>
-		<div className="AppWrapper-body">
-			<div className="AppWrapper-content">
-				{children}
-			</div>
+import './AppWrapper.css'
+import './AppWrapperHeader.css'
+import './AppWrapperBody.css'
+import './AppWrapperContent.css'
+import './Icon.css'
+
+const Icon = ({children: iconName}) => (
+	<span className={`Icon ${iconName}`}/>
+)
+
+class Toggle extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			value: true
+		}
+	}
+
+	onClick = () => {
+		const {value} = this.state
+		const {onClick} = this.props
+
+		this.setState({
+			value: !value,
+		})
+		onClick(!value)
+	}
+
+	render() {
+		const {value} = this.state
+		const icon = value
+			? 'IconFullScreenOn'
+			: 'IconFullScreenOff'
+
+		return (
+			<button className="InvisibleButton" onClick={this.onClick}>
+				<Icon>{icon}</Icon>
+			</button>
+		)
+	}
+}
+
+const Head = ({title, onToggleFullPage, showFullPageToggle, showControls = false}) => (
+	<header className="AppWrapperHeader">
+		<div>
 		</div>
-		{/*<footer className="AppWrapper-footer">Foo Maps</footer>*/}
+
+		<div className="AppWrapperHeader-main">
+			<h1>{title}</h1>
+		</div>
+
+		<div>
+			{!showControls ? null : (
+				<div className="controls">
+					{!showFullPageToggle ? null: (
+						<Toggle onClick={onToggleFullPage}/>
+					)}
+				</div>
+			)}
+		</div>
+	</header>
+)
+
+const Body = ({children}) => (
+	<div className="AppWrapperBody">
+		<div className="AppWrapperContent">
+			{children}
+		</div>
 	</div>
 )
 
-export default App
+const AppWrapper = ({title, children, showControls, showFullPageToggle, onToggleFullPage}) => (
+	<div className="AppWrapper">
+		<Head
+			title={title}
+			showControls={showControls}
+			onToggleFullPage={onToggleFullPage}
+			showFullPageToggle={showFullPageToggle}
+		/>
+
+		<Body>{children}</Body>
+	</div>
+)
+
+export default AppWrapper

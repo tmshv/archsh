@@ -1,46 +1,67 @@
-//import {zip} from '../lib/fn'
+import {zipBy} from '../lib/fn'
+import {projectFiles} from '../config'
 
-const map = fn => list => Promise.all(
+const mapAll = fn => list => Promise.all(
 	list.map(fn)
 )
 
-function zipBy (key, list1, list2) {
-	const [small, other] = list1.length <= list2.length
-		? [list1, list2]
-		: [list2, list1]
-	//return small.map((s, i) => [s, other[i]])
-
-	return small.map(s => {
-		const k = key(s)
-		const o = other.find(i => key(i) === k)
-		return [s, o]
-	})
+function basename(path) {
+	return path.replace(/.*\//, '')
 }
 
-const zip = zipBy.bind(null, i => i.properties.name)
+function dirname(path) {
+	return path.match(/.*\//)[0]
+}
+
+function remapImageSrc(base) {
+	return html => {
+		const element = document.createElement('div')
+		element.innerHTML = html
+
+		const imgs = [...element.querySelectorAll('img')]
+		imgs.forEach(x => {
+			const file = basename(x.src)
+			x.src = `${base}${file}`
+			return x
+		})
+
+		return element.innerHTML
+	}
+}
+
+export function fetchContent(url) {
+	const dir = dirname(url)
+
+	return fetch(url)
+		.then(res => res.text())
+		.then(remapImageSrc(dir))
+}
+
 
 const api = {
 	projects: {
 		fetch () {
 			return Promise
-				.resolve(['/points.geojson', '/areas.geojson'])
-				.then(map(url => fetch(url)))
-				.then(map(res => res.json()))
-				.then(map(i => i.features))
+				.resolve(projectFiles)
+				.then(mapAll(url => fetch(url)))
+				.then(mapAll(res => res.json()))
+				.then(mapAll(i => i.features))
 				.then(([points, areas]) => {
+					const zip = (list1, list2) => zipBy(i => i.properties.name, list1, list2)
+
 					const items = zip(points, areas)
 						.map(([point, area]) => ({
-							location: point.geometry.coordinates.reverse(),
-							//area: area.geometry.coordinates,
-							area: area,
-							name: point.properties.name,
-							title: '<p>Title</p>',
-							content: '<p>Content</p>',
-						}))
+							...point.properties,
 
-					return {items, total: 100500}
+							location: point.geometry.coordinates.reverse(),
+							area: area,
+						}))
+						.filter(x => Boolean(x.name))
+
+					return {items, total: 100}
 				})
-		}
+		},
+		fetchContent,
 	}
 }
 
