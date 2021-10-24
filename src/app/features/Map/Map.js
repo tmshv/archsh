@@ -3,7 +3,7 @@ import Leaflet from 'leaflet'
 import {Map, Marker, TileLayer, GeoJSON, LayerGroup} from 'react-leaflet'
 import {getBoundsOf} from '../../../lib/geo'
 
-const tilePattern = '//{s}.tiles.shlisselburg.org/oreshek/1.0/{z}/{x}/{y}.png'
+const tilePattern = '/static/oreshek/1.0/{z}/{x}/{y}.png'
 const attr = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
 const position = [59.943276365872194, 31.038522720336918]
 
