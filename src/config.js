@@ -1,8 +1,8 @@
 export const yandexMetrikaAccount = 46147713
 
 export const projectFiles = [
-	'https://static.shlisselburg.org/arch/points.geojson',
-	'https://static.shlisselburg.org/arch/areas.geojson',
+	'/static/points.geojson',
+	'/static/areas.geojson',
 ]
 export const title = 'Архитектурные проекты Шлиссельбурга'
 
